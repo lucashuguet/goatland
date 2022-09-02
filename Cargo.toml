@@ -6,3 +6,7 @@ members = [
     "server",
     "bin",
 ]
+
+
+[profile.dev.package."*"]
+opt-level = 3
