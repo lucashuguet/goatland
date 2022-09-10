@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::{prelude::*, window::WindowMode};
 
 mod controls;
 mod voxel;
@@ -15,6 +15,7 @@ fn main() {
             decorations: false,
             canvas: Some("#canvas".to_string()),
             fit_canvas_to_parent: true,
+            mode: WindowMode::BorderlessFullscreen,
             ..default()
         })
         .add_plugins(DefaultPlugins)
@@ -27,11 +28,11 @@ fn main() {
 fn setup(mut commands: Commands) {
     commands.spawn_bundle(PointLightBundle {
         point_light: PointLight {
-            intensity: 1500.,
-            // shadows_enabled: true,
+            intensity: 5000.,
+            shadows_enabled: true,
             ..default()
         },
-        transform: Transform::from_xyz(2., 8., 2.),
+        transform: Transform::from_xyz(0., 20., 0.),
         ..default()
     });
 
