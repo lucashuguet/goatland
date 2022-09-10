@@ -8,6 +8,7 @@ const RADIANT: f32 = PI / 180.;
 #[derive(Component)]
 pub struct PlayerController;
 
+#[allow(dead_code)]
 pub fn print_xyz(mut query: Query<(&Transform, With<PlayerController>)>) {
     let (transform, _) = query.single_mut();
 
@@ -75,8 +76,7 @@ pub struct PlayerControllerPlugin;
 
 impl Plugin for PlayerControllerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system(player_movement)
-            .add_system(camera_rotation)
-            .add_system(print_xyz);
+        app.add_system(player_movement).add_system(camera_rotation);
+        // .add_system(print_xyz);
     }
 }
