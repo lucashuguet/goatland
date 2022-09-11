@@ -498,9 +498,9 @@ dependencies = [
 
 [[package]]
 name = "bevy_math"
-version = "0.8.0"
+version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db5394e86c5708d3aa506c6e98ec4ed2a4083a7a018c6693d9ac0e77ebfabfc2"
+checksum = "531f2b90c7e861a96f418b3d560131b3354c5e67a67eba3953a45a56ea0114d2"
 dependencies = [
  "glam 0.21.3",
 ]
@@ -822,8 +822,7 @@ name = "bin"
 version = "0.1.0"
 dependencies = [
  "bevy",
- "block-mesh",
- "noise",
+ "client",
 ]
 
 [[package]]
@@ -983,6 +982,11 @@ dependencies = [
 [[package]]
 name = "client"
 version = "0.1.0"
+dependencies = [
+ "bevy_math",
+ "block-mesh",
+ "noise",
+]
 
 [[package]]
 name = "cocoa"
@@ -1338,9 +1342,9 @@ checksum = "9ea835d29036a4087793836fa931b08837ad5e957da9e23886b29586fb9b6650"
 
 [[package]]
 name = "either"
-version = "1.7.0"
+version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3f107b87b6afc2a64fd13cac55fe06d6c8859f12d4b14cbcdd2c67d0976781be"
+checksum = "90e5c1c8368803113bf0c9584fc495a58b86dc8a29edbf8fe877d21d9507e797"
 
 [[package]]
 name = "encase"
