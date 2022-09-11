@@ -49,10 +49,16 @@ pub fn parse_orientation(minimum: Vec3, size: Vec2, orientation: &Orientation) -
     }
 }
 
-pub fn parse_normal(index: usize) -> Orientation {
-    let normal = RIGHT_HANDED_Y_UP_CONFIG.faces[index].quad_mesh_normals()[0];
+pub fn parse_normal(index: usize, custom: Option<[i32; 3]>) -> Orientation {
+    let normals = RIGHT_HANDED_Y_UP_CONFIG.faces[index].quad_mesh_normals()[0];
 
-    match [normal[0] as i32, normal[1] as i32, normal[2] as i32] {
+    let normal = if let Some(c) = custom {
+        c
+    } else {
+        [normals[0] as i32, normals[1] as i32, normals[2] as i32]
+    };
+
+    match normal {
         [0, 1, 0] => Orientation::Top,
         [0, -1, 0] => Orientation::Bottom,
         [-1, 0, 0] => Orientation::Left,

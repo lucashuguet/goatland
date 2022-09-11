@@ -1,4 +1,5 @@
 pub mod mesh;
+pub mod noisemap;
 pub mod orientation;
 
 #[cfg(test)]
@@ -6,8 +7,9 @@ mod goatland {
     use std::f32::consts::PI;
 
     use bevy_math::{Quat, Vec2, Vec3};
+    use block_mesh::MergeVoxel;
 
-    use crate::{mesh, orientation};
+    use crate::{mesh, noisemap, orientation};
 
     #[test]
     fn test_deg2rand() {
@@ -80,25 +82,50 @@ mod goatland {
 
     #[test]
     fn test_parse_normal() {
-        assert_eq!(orientation::parse_normal(0), orientation::Orientation::Left);
         assert_eq!(
-            orientation::parse_normal(1),
+            orientation::parse_normal(0, None),
+            orientation::Orientation::Left
+        );
+        assert_eq!(
+            orientation::parse_normal(1, None),
             orientation::Orientation::Bottom
         );
-        assert_eq!(orientation::parse_normal(2), orientation::Orientation::Back);
         assert_eq!(
-            orientation::parse_normal(3),
+            orientation::parse_normal(2, None),
+            orientation::Orientation::Back
+        );
+        assert_eq!(
+            orientation::parse_normal(3, None),
             orientation::Orientation::Right
         );
-        assert_eq!(orientation::parse_normal(4), orientation::Orientation::Top);
         assert_eq!(
-            orientation::parse_normal(5),
+            orientation::parse_normal(4, None),
+            orientation::Orientation::Top
+        );
+        assert_eq!(
+            orientation::parse_normal(5, None),
             orientation::Orientation::Front
         );
     }
 
     #[test]
+    #[should_panic]
+    fn test_invalid_normal() {
+        orientation::parse_normal(0, Some([-1, 1, 0]));
+    }
+
+    #[test]
     fn test_genchunk() {
         assert_eq!(mesh::genchunk(0, 0, 0).num_quads(), 375);
+    }
+
+    #[test]
+    fn test_mergevoxel() {
+        assert_eq!(mesh::BoolVoxel(true).merge_value(), mesh::BoolVoxel(true));
+    }
+
+    #[test]
+    fn test_worldmap() {
+        assert_eq!(noisemap::genmap().get_value(0, 0), -0.6582106524573439);
     }
 }

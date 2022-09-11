@@ -4,10 +4,10 @@ use block_mesh::{
     RIGHT_HANDED_Y_UP_CONFIG,
 };
 
-use noise::{NoiseFn, OpenSimplex, Seedable};
+use noise::{NoiseFn, OpenSimplex};
 
-#[derive(Clone, Copy, Eq, PartialEq)]
-struct BoolVoxel(bool);
+#[derive(Clone, Copy, Eq, PartialEq, Debug)]
+pub struct BoolVoxel(pub bool);
 
 const EMPTY: BoolVoxel = BoolVoxel(false);
 const FULL: BoolVoxel = BoolVoxel(true);
@@ -31,8 +31,7 @@ impl MergeVoxel for BoolVoxel {
 }
 
 pub fn genchunk(chunkx: i32, chunkz: i32, seed: u32) -> UnitQuadBuffer {
-    let mut noise = OpenSimplex::new();
-    noise = noise.set_seed(seed);
+    let noise = OpenSimplex::new(seed);
 
     type ChunkShape = ConstShape3u32<18, 130, 18>;
 

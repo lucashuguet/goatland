@@ -48,7 +48,7 @@ pub fn spawnchunk(
         })
         .with_children(|parent| {
             for (index, quadbuffer) in buffer.groups.iter().enumerate() {
-                let orientation = parse_normal(index);
+                let orientation = parse_normal(index, None);
 
                 for quad in quadbuffer.iter() {
                     parent.spawn_bundle(squaregen(

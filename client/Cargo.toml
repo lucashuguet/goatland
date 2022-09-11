@@ -7,5 +7,5 @@ edition = "2021"
 
 [dependencies]
 block-mesh = "0.2.0"
-noise = "0.7.0"
+noise = { git = "https://github.com/Razaekel/noise-rs" }
 bevy_math = "0.8.1"
